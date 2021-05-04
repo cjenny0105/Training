@@ -1,24 +1,19 @@
 package com.example.restclient;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.restclient.employee.Employee;
+import com.example.restclient.employee.EmployeeInterface;
 import com.example.restclient.employee.EmployeeService;
 
 public class MyClient {
 	
 	public static void main(String[] args) {
 		
-		EmployeeService employeeService = new EmployeeService();
-		
+		EmployeeInterface employeeService= new EmployeeService();
 		
 		
 		//Get all Employees Service
@@ -87,6 +82,12 @@ public class MyClient {
 		System.out.println("********************************");
 		});
 		
+	}
+	
+	@Bean
+	public RestTemplate getRestTemplate() {
+		
+		return new RestTemplate();
 	}
 
 }

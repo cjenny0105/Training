@@ -17,10 +17,11 @@ import org.springframework.web.client.RestTemplate;
 
 
 @Service
-public class EmployeeService {
+public class EmployeeService implements EmployeeInterface {
 	
 	RestTemplate restTemplate = new RestTemplate();
 	
+	@Override
 	public List<Employee> getEmployees() {
 		
 		ResponseEntity<List<Employee>> responseEntity = restTemplate.exchange(
@@ -31,10 +32,12 @@ public class EmployeeService {
 		 return employeeList;
 	}
 
+	@Override
 	public Employee getEmployeeById(String id) {
 		return restTemplate.getForObject("http://localhost:8080/employee/" + id, Employee.class);
 	}
 
+	@Override
 	public void addEmployee(Employee e) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -44,11 +47,13 @@ public class EmployeeService {
 		
 	}
 
+	@Override
 	public void deleteEmployee(String id) {
 		
 		restTemplate.delete("http://localhost:8080/employee/"+id);
 	}
 
+	@Override
 	public void updateEmployee(Employee e, String id) {
 		
 		HttpHeaders headers = new HttpHeaders();
